@@ -15,7 +15,7 @@ describe("PaymentContract", function () {
 
     [owner, addr1] = await ethers.getSigners();
   });
-  
+
   it("Should accept payments", async () => {
     const paymentAmount = ethers.parseEther("1.0"); // 1 ETH
 
@@ -65,7 +65,7 @@ describe("PaymentContract", function () {
 
     // addr1 пытается вывести средства
     await expect(paymentContract.connect(addr1).withdraw(paymentAmount)).to.be.revertedWith(
-      "Only the owner can withdraw funds"
+      "Only the owner can withdraw funds",
     );
   });
 
@@ -80,7 +80,7 @@ describe("PaymentContract", function () {
 
     // Владелец пытается вывести больше средств, чем есть в контракте
     await expect(paymentContract.withdraw(paymentAmount + BigInt(1))).to.be.revertedWith(
-      "Insufficient balance in contract"
+      "Insufficient balance in contract",
     );
   });
 });
